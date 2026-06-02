@@ -1,0 +1,957 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Opera Cloud – mVillage · Phương án Triển khai 2026</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+  *{margin:0;padding:0;box-sizing:border-box}
+  :root{
+    --navy:#1B3A6B;--navy-dark:#0F2347;--teal:#0D7A8A;--teal-light:#1A9BAD;
+    --gold:#D4A017;--gold-light:#F0BE2D;--off-white:#F4F7FA;--gray:#64748B;
+    --light-gray:#E8EDF3;--text-dark:#1E293B;--text-mid:#475569;
+    --success:#10B981;--warning:#F59E0B;--danger:#EF4444;--odoo:#714B67;
+  }
+  body{font-family:'Inter',sans-serif;background:#12122a;display:flex;flex-direction:column;align-items:center;padding:30px 20px;gap:20px;color:var(--text-dark)}
+  .slide{width:960px;min-height:540px;border-radius:12px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.55);position:relative;flex-shrink:0}
+
+  /* TITLE */
+  .s-title{background:linear-gradient(135deg,#0F2347 0%,#1B3A6B 45%,#3B1460 100%);display:flex;flex-direction:column;justify-content:center;align-items:flex-start;padding:56px 72px;min-height:540px}
+  .s-title .pill{background:var(--gold);color:#0F2347;font-size:11px;font-weight:800;letter-spacing:2px;text-transform:uppercase;padding:5px 14px;border-radius:4px;margin-bottom:26px;display:inline-block}
+  .s-title h1{font-size:42px;font-weight:900;color:#fff;line-height:1.15;margin-bottom:14px;max-width:720px}
+  .s-title h1 span{color:#F0B429}
+  .s-title .sub{font-size:17px;color:rgba(255,255,255,.72);margin-bottom:44px}
+  .meta-row{display:flex;gap:36px}
+  .meta-item{display:flex;flex-direction:column;gap:3px}
+  .meta-item .v{font-size:26px;font-weight:900;color:#F0B429}
+  .meta-item .l{font-size:11px;color:#1E293B;text-transform:uppercase;letter-spacing:1px}
+  .odoo-badge{position:absolute;top:28px;right:36px;background:rgba(113,75,103,.35);border:1px solid rgba(113,75,103,.6);border-radius:8px;padding:10px 16px;text-align:center}
+  .odoo-badge .ob-t{font-size:10px;color:rgba(255,255,255,.75);text-transform:uppercase;letter-spacing:1px}
+  .odoo-badge .ob-v{font-size:13px;font-weight:700;color:#C084FC;margin-top:2px}
+  .bottom-stripe{position:absolute;bottom:0;left:0;right:0;height:5px;background:linear-gradient(90deg,var(--gold),var(--teal-light),#A855F7)}
+
+  /* HEADER */
+  .sh{padding:20px 44px;display:flex;align-items:center;gap:14px}
+  .sh-navy{background:var(--navy)}
+  .sh-dark{background:#0D4A5C}
+  .sh-odoo{background:#4A2040}
+  .sh .num{width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;flex-shrink:0}
+  .sh .num-gold{background:var(--gold);color:#0F2347}
+  .sh .num-teal{background:var(--teal-light);color:#fff}
+  .sh .num-odoo{background:#C084FC;color:#2D0040}
+  .sh h2{font-size:21px;font-weight:700;color:#fff;flex:1}
+  .sh .stag{font-size:11px;color:rgba(255,255,255,.7);text-transform:uppercase;letter-spacing:1.5px;font-weight:600}
+
+  /* BODY */
+  .sb{background:var(--off-white);padding:28px 44px;min-height:430px}
+  .sb-dark{background:var(--navy-dark);padding:28px 44px;min-height:430px}
+  .sb-odoo{background:#1A0A20;padding:28px 44px;min-height:430px}
+
+  /* CARDS */
+  .card{background:#fff;border-radius:10px;padding:18px 22px;box-shadow:0 2px 8px rgba(0,0,0,.06)}
+  .c-teal{border-left:4px solid var(--teal)}.c-gold{border-left:4px solid var(--gold)}
+  .c-navy{border-left:4px solid var(--navy)}.c-green{border-left:4px solid var(--success)}
+  .c-odoo{border-left:4px solid #A855F7}.c-danger{border-left:4px solid var(--danger)}
+
+  /* GRID */
+  .g2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px}
+  .g4{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:13px}
+
+  /* STAT */
+  .stat{background:#fff;border-radius:10px;padding:18px;text-align:center;box-shadow:0 2px 8px rgba(0,0,0,.07)}
+  .stat .n{font-size:38px;font-weight:900;color:var(--navy);line-height:1}
+  .stat .u{font-size:13px;font-weight:700;color:var(--teal)}
+  .stat .lb{font-size:11px;color:#6B7280;margin-top:5px}
+
+  /* TABLE */
+  table{width:100%;border-collapse:collapse;font-size:12.5px}
+  th{background:var(--navy);color:#fff;padding:9px 13px;text-align:left;font-size:11.5px;font-weight:600;letter-spacing:.4px}
+  td{padding:8px 13px;border-bottom:1px solid #E2E8F0;color:#1E293B;vertical-align:top}
+  tr:nth-child(even) td{background:#F8FAFC;color:#1E293B}
+  tr:last-child td{border-bottom:none}
+  .badge{display:inline-block;padding:2px 9px;border-radius:11px;font-size:11px;font-weight:600}
+  .b-teal{background:#CCFBF1;color:#0D7A8A}.b-gold{background:#FEF3C7;color:#92400E}
+  .b-red{background:#FEE2E2;color:#991B1B}.b-purple{background:#F3E8FF;color:#6B21A8}
+  .b-green{background:#D1FAE5;color:#065F46}
+
+  /* TIMELINE */
+  .tl-item{display:flex;gap:14px;position:relative}
+  .tl-left{display:flex;flex-direction:column;align-items:center;width:70px;flex-shrink:0}
+  .tl-dot{width:13px;height:13px;border-radius:50%;flex-shrink:0;border:2px solid #fff;margin-top:3px}
+  .tl-line{width:2px;background:var(--light-gray);flex:1;margin-top:2px}
+  .tl-ph{font-size:10px;font-weight:700;text-transform:uppercase;margin-bottom:2px}
+  .tl-box{background:#fff;border-radius:8px;padding:12px 16px;margin-bottom:11px;flex:1;box-shadow:0 1px 4px rgba(0,0,0,.06)}
+  .tl-box h4{font-size:13px;font-weight:700;color:var(--navy);margin-bottom:3px}
+  .tl-box p{font-size:11.5px;color:#4B5563;line-height:1.5}
+  .tl-dur{font-size:10.5px;padding:2px 8px;border-radius:9px;font-weight:700;display:inline-block;margin-top:4px}
+
+  /* ORG */
+  .org-box{border-radius:8px;padding:9px 14px;text-align:center;font-size:11.5px;font-weight:600;box-shadow:0 2px 6px rgba(0,0,0,.1)}
+  .org-top{background:var(--navy);color:#fff;padding:11px 22px;font-size:13px}
+  .org-mid{background:var(--teal);color:#fff}
+  .org-sub{background:#fff;color:var(--navy);border:2px solid var(--light-gray);font-size:11px;padding:7px 11px}
+  .org-con{width:2px;height:16px;background:#CBD5E1;margin:0 auto}
+  .org-sub-lb{font-size:10px;color:var(--gray);margin-top:2px;text-align:center}
+
+  /* RISK */
+  .r-high td:first-child{border-left:4px solid var(--danger)}
+  .r-med  td:first-child{border-left:4px solid var(--warning)}
+  .r-low  td:first-child{border-left:4px solid var(--success)}
+
+  /* HC BARS */
+  .hc{display:flex;align-items:center;gap:10px;margin-bottom:9px}
+  .hc-lb{font-size:12px;color:var(--text-dark);min-width:185px;font-weight:500}
+  .hc-bg{flex:1;height:19px;background:var(--light-gray);border-radius:4px;overflow:hidden}
+  .hc-fill{height:100%;border-radius:4px;display:flex;align-items:center;padding-left:7px}
+  .hc-fill span{font-size:10.5px;font-weight:700;color:#fff}
+  .hc-n{font-size:13px;font-weight:700;color:var(--navy);min-width:38px;text-align:right}
+
+  /* MODULE */
+  .mod{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.14);border-radius:9px;padding:14px 16px;text-align:center}
+  .mod .mi{font-size:22px;margin-bottom:6px}
+  .mod .mn{font-size:11.5px;font-weight:700;color:#fff}
+  .mod .ms{font-size:10px;color:rgba(255,255,255,.65);margin-top:2px}
+
+  /* KPI */
+  .kpi{background:rgba(255,255,255,.06);border-radius:10px;padding:16px 18px;border:1px solid rgba(255,255,255,.1);text-align:center}
+  .kpi .kv{font-size:30px;font-weight:900;color:#F0B429}
+  .kpi .kl{font-size:11.5px;color:rgba(255,255,255,.62);margin-top:3px}
+
+  /* ODOO FLOW */
+  .flow-box{background:rgba(255,255,255,.06);border:1px solid rgba(168,85,247,.25);border-radius:9px;padding:14px 16px;text-align:center}
+  .flow-box .fb-icon{font-size:22px;margin-bottom:6px}
+  .flow-box .fb-title{font-size:12px;font-weight:700;color:#E9D5FF}
+  .flow-box .fb-sub{font-size:10.5px;color:rgba(255,255,255,.7);margin-top:3px}
+  .flow-arrow{display:flex;align-items:center;justify-content:center;color:#F0B429;font-size:20px;font-weight:900}
+
+  /* CONCLUSION */
+  .s-close{background:linear-gradient(135deg,#0F2347,#3B1460 60%,#0D4A5C);padding:44px 68px;min-height:540px;display:flex;flex-direction:column;justify-content:center;position:relative}
+
+  .slide-n{position:absolute;bottom:12px;right:18px;font-size:10.5px;color:rgba(255,255,255,.6);font-weight:500}
+  h3{font-size:14px;font-weight:700;color:var(--navy);margin-bottom:11px}
+  p{font-size:12.5px;color:var(--text-mid);line-height:1.6}
+  .mt8{margin-top:8px}.mt12{margin-top:12px}.mt16{margin-top:16px}.mt20{margin-top:20px}
+  .mb8{margin-bottom:8px}.mb12{margin-bottom:12px}
+</style>
+</head>
+<body>
+
+<!-- ══ SLIDE 1: TITLE ══ -->
+<div class="slide">
+  <div class="s-title">
+    <div class="odoo-badge">
+      <div class="ob-t">Migration từ</div>
+      <div class="ob-v">🟣 Odoo PMS</div>
+    </div>
+    <div class="pill">📊 Phân tích Chiến lược · 2026</div>
+    <h1>Phương án Triển khai<br><span>Opera Cloud</span> cho mVillage</h1>
+    <p class="sub">Chuỗi khách sạn 70 property · 3,000 phòng · Migration từ Odoo · Tích hợp hệ sinh thái kỹ thuật số</p>
+    <div class="meta-row">
+      <div class="meta-item"><span class="v">70</span><span class="l" style="color:rgba(255,255,255,.6)">Properties</span></div>
+      <div class="meta-item"><span class="v">3,000</span><span class="l" style="color:rgba(255,255,255,.6)">Phòng</span></div>
+      <div class="meta-item"><span class="v">12+</span><span class="l" style="color:rgba(255,255,255,.6)">Tháng triển khai</span></div>
+      <div class="meta-item"><span class="v">3</span><span class="l" style="color:rgba(255,255,255,.6)">Phương án</span></div>
+      <div class="meta-item"><span class="v">8.2 tỷ</span><span class="l" style="color:rgba(255,255,255,.6)">Chi phí Opera/năm</span></div>
+    </div>
+    <div class="bottom-stripe"></div>
+  </div>
+  <span class="slide-n">01 / 14</span>
+</div>
+
+<!-- ══ SLIDE 2: PROFILE DỰ ÁN ══ -->
+<div class="slide">
+  <div class="sh sh-navy"><div class="num num-gold">1</div><h2>Profile Dự án & Bối cảnh Triển khai</h2><span class="stag">Bối cảnh</span></div>
+  <div class="sb">
+    <div class="g4" style="margin-bottom:18px">
+      <div class="stat"><div class="n">70</div><div class="u">Properties</div><div class="lb">Cùng thương hiệu mVillage</div></div>
+      <div class="stat"><div class="n">3,000</div><div class="u">Phòng</div><div class="lb">TB 43 phòng/property</div></div>
+      <div class="stat"><div class="n">70</div><div class="u">OHIP Env</div><div class="lb">1 env / property</div></div>
+      <div class="stat"><div class="n" style="color:#714B67;font-size:28px">Odoo</div><div class="u" style="color:#A855F7">PMS hiện tại</div><div class="lb">Reservation module</div></div>
+    </div>
+    <div class="g2" style="gap:14px">
+      <div>
+        <div class="card c-teal mb12">
+          <h3>🏨 Đặc điểm chuỗi mVillage</h3>
+          <div style="font-size:12px;color:var(--text-mid);line-height:1.75">
+            <div>✔ 70 property cùng thương hiệu → 1 master template Opera, rollout theo batch</div>
+            <div>✔ TB 43 phòng/property → quy mô mid-scale, triển khai mỗi site ~1–2 tuần</div>
+            <div>✔ Vận hành 24/7 → mỗi lần go-live property cần downtime vài tiếng; lên lịch vào sáng sớm thứ Hai, ưu tiên low-season</div>
+            <div>✔ Web/App direct booking + Loyalty → bắt buộc có PMS Integration Service</div>
+            <div>✔ Hotellink kết nối OTA + Travel Agent → giữ nguyên, không migrate sang Distribution</div>
+          </div>
+        </div>
+        <div class="card c-odoo">
+          <h3 style="color:#714B67">🟣 Đặc thù: Odoo chỉ quản lý Reservation</h3>
+          <div style="font-size:12px;color:var(--text-mid);line-height:1.75">
+            <div>⚠ Odoo hiện là core system — các service khác (Payment, Booking, User...) đang cắm vào và sử dụng reservation từ Odoo</div>
+            <div>⚠ Chỉ migrate reservation data — không phải toàn bộ Odoo</div>
+            <div>⚠ Cần xử lý phân tách doanh thu theo từng hạng mục tài khoản doanh thu (tiền phòng, F&amp;B, Spa, Laundry...)</div>
+            <div>⚠ Partner (Partner) cung cấp migration file template chuẩn Opera format</div>
+          </div>
+        </div>
+      </div>
+      <div class="card" style="padding:0;overflow:hidden">
+        <div style="background:var(--navy);padding:12px 16px"><h3 style="color:#fff;margin:0;font-size:12.5px">Hệ thống cần tích hợp</h3></div>
+        <div style="padding:14px 16px">
+          <table style="font-size:11.5px">
+            <tr><th style="font-size:10.5px;padding:7px 11px;background:#F97316">Hệ thống</th><th style="font-size:10.5px">Xử lý</th><th style="font-size:10.5px">Owner</th></tr>
+            <tr><td><strong>Odoo Reservation</strong></td><td>Migration → Opera</td><td><span class="badge b-purple">Partner</span></td></tr>
+            <tr><td>Payment (OnePay, OCB, TP)</td><td>Opera native + OFIS</td><td><span class="badge b-purple">Partner</span></td></tr>
+            <tr><td>Invoice (Fast ERP, Viettel)</td><td>Opera OFIS e-invoice</td><td><span class="badge b-purple">Partner</span></td></tr>
+            <tr><td>Hotellink (OTA/Travel Agent)</td><td>Giữ nguyên, kết nối Opera</td><td><span class="badge b-teal">MVL+Partner</span></td></tr>
+            <tr><td>Web/App Booking Engine</td><td>PMS Integration Service</td><td><span class="badge b-teal">MVL</span></td></tr>
+            <tr><td>CMS (Strapi, House Guide)</td><td>PMS Integration Service</td><td><span class="badge b-teal">MVL</span></td></tr>
+            <tr><td>HubSpot CRM</td><td>Sync → Opera Profile</td><td><span class="badge b-teal">MVL</span></td></tr>
+            <tr><td>Dynamic Pricing Engine</td><td>Pull Opera rate → compute → overwrite</td><td><span class="badge b-teal">MVL</span></td></tr>
+            <tr><td>Data Warehouse</td><td>OHIP Streaming → BigQuery</td><td><span class="badge b-teal">MVL</span></td></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <span class="slide-n">02 / 14</span>
+</div>
+
+<!-- ══ SLIDE 3: ODOO MIGRATION ══ -->
+<div class="slide">
+  <div class="sh sh-odoo"><div class="num num-odoo">2</div><h2>Kế hoạch Migration Dữ liệu từ Odoo → Opera Cloud</h2><span class="stag">Data Migration</span></div>
+  <div class="sb-odoo">
+    <div style="display:grid;grid-template-columns:2fr 1fr;gap:20px;margin-bottom:16px">
+      <div>
+        <div style="font-size:12px;font-weight:700;color:rgba(255,255,255,.75);text-transform:uppercase;letter-spacing:1px;margin-bottom:10px">Luồng Migration</div>
+        <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+          <div class="flow-box" style="flex:1;min-width:120px">
+            <div class="fb-icon">🟣</div>
+            <div class="fb-title">Odoo PostgreSQL</div>
+            <div class="fb-sub">Reservation data<br>Raw export</div>
+          </div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-box" style="flex:1;min-width:120px">
+            <div class="fb-icon">🔧</div>
+            <div class="fb-title">ETL & Transform</div>
+            <div class="fb-sub">MVL export DB<br>Partner process file</div>
+          </div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-box" style="flex:1;min-width:120px">
+            <div class="fb-icon">📊</div>
+            <div class="fb-title">Revenue Split</div>
+            <div class="fb-sub">Tiền phòng vs<br>Service category</div>
+          </div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-box" style="flex:1;min-width:120px">
+            <div class="fb-icon">🏨</div>
+            <div class="fb-title">Opera Migration</div>
+            <div class="fb-sub">Partner import tool<br>Validate & verify</div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div style="font-size:12px;font-weight:700;color:rgba(255,255,255,.75);text-transform:uppercase;letter-spacing:1px;margin-bottom:10px">Phạm vi Migration</div>
+        <div style="background:rgba(255,255,255,.06);border-radius:8px;padding:12px 14px">
+          <div style="font-size:11.5px;color:rgba(255,255,255,.9);line-height:2">
+            <div>✅ Future &amp; past reservations (confirmed)</div>
+            <div>✅ Guest profile (individual)</div>
+            <div>✅ Company profile (B2B)</div>
+            <div>✅ Loyalty / user status (signup)</div>
+            <div>❌ Folio (không migrate)</div>
+            <div>❌ Odoo Accounting data</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <table style="font-size:11.5px">
+      <tr>
+        <th style="background:#3D1060">Odoo Object</th>
+        <th style="background:#3D1060">Opera Target</th>
+        <th style="background:#3D1060">Xử lý đặc biệt</th>
+        <th style="background:#3D1060">Owner</th>
+      </tr>
+      <tr><td><strong>res.reservation</strong></td><td>Opera Reservation</td><td>Mapping data fields và Opera status code tương ứng</td><td><span class="badge b-purple">Partner</span></td></tr>
+      <tr><td style="color:#FFFFFF"><strong>res.reservation.line</strong> (room)</td><td style="color:#FFFFFF">Opera Room Stay</td><td style="color:#FFFFFF">Tách tiền phòng riêng → Rate Amount trong Opera folio</td><td><span class="badge b-purple">Partner</span></td></tr>
+      <tr><td><strong>reservation / service lines</strong></td><td>Opera Additional Charges</td><td>Phân loại theo Service Category: F&amp;B, Spa, Laundry, Extra service</td><td><span class="badge b-purple">Partner</span></td></tr>
+      <tr><td style="color:#FFFFFF"><strong>res.partner</strong> (guest)</td><td style="color:#FFFFFF">Opera Individual Profile</td><td style="color:#FFFFFF">Search-before-create: match email + phone + name → tránh duplicate</td><td><span class="badge b-teal">MVL+Partner</span></td></tr>
+      <tr><td><strong>Deposit / payment</strong></td><td>Opera Folio Deposit</td><td>Phân loại deposit và payment, mapping vào Opera folio tương ứng, reconcile với Fast ERP</td><td><span class="badge b-purple">Partner</span></td></tr>
+    </table>
+    <div style="margin-top:12px;background:rgba(240,190,45,.1);border:1px solid rgba(240,190,45,.3);border-radius:8px;padding:10px 14px">
+      <span style="font-size:11.5px;color:#F0B429">⚠ Điều kiện tiên quyết: MVL export Odoo DB → Partner nhận file → Partner cung cấp migration template chuẩn Opera → MVL validate trước cutover 2 tuần. Revenue split phải được Finance xác nhận trước khi import.</span>
+    </div>
+  </div>
+  <span class="slide-n">03 / 14</span>
+</div>
+
+<!-- ══ SLIDE 4: TẠI SAO OPERA CLOUD ══ -->
+<div class="slide">
+  <div class="sh sh-navy"><div class="num num-gold">3</div><h2>Tại sao Opera Cloud — và tại sao không tiếp tục Odoo?</h2><span class="stag">Product Selection</span></div>
+  <div class="sb">
+    <div class="g3" style="margin-bottom:16px">
+      <div class="card c-danger">
+        <h3 style="color:var(--danger)">❌ Odoo PMS — Vấn đề hiện tại</h3>
+        <div style="font-size:12px;color:var(--text-mid);line-height:1.8">
+          <div>🔴 Không có native OTA certification (Booking.com, Agoda)</div>
+          <div>🔴 Không hỗ trợ GDS connectivity</div>
+          <div>🔴 Không có tổ chức tài khoản doanh thu chuẩn kế toán</div>
+          <div>🔴 Không có End of Day → không chốt doanh thu được</div>
+          <div>🔴 Scale 3,000 phòng / 70 properties khó quản lý trên Odoo</div>
+        </div>
+      </div>
+      <div class="card c-teal">
+        <h3 style="color:var(--teal)">✅ Opera Cloud — Lý do chọn</h3>
+        <div style="font-size:12px;color:var(--text-mid);line-height:1.8">
+          <div>✅ OHIP API: PAR, RSV, CRM — $0 Hotelier track</div>
+          <div>✅ Business Events / Streaming cho Data Warehouse</div>
+          <div>✅ Oracle Central: 1 master config cho 70 properties</div>
+          <div>✅ Industry standard: Marriott, Hyatt, Accor đang dùng</div>
+          <div>✅ OFIS e-invoice tích hợp native → Partner triển khai</div>
+        </div>
+      </div>
+      <div class="card c-gold">
+        <h3 style="color:#92400E">🎯 Quyết định chiến lược</h3>
+        <div style="font-size:12px;color:var(--text-mid);line-height:1.8">
+          <div>→ <strong>Dừng Odoo development</strong> — dồn resource vào Opera</div>
+          <div>→ <strong>Chọn giải pháp Channel Manager</strong> để giữ kết nối OTA &amp; Travel Agent — không mua Opera Distribution (vì không kết nối trực tiếp với Travel Agent)</div>
+          <div>→ <strong>Partner</strong> lo Payment, Invoice, FnB, Migration</div>
+          <div>→ <strong>MVL team</strong> lo PMS Integration Service, Booking, User, Pricing, Loyalty</div>
+          <div>→ <strong>Data Warehouse</strong> qua OHIP Streaming → BigQuery → Looker Studio</div>
+        </div>
+      </div>
+    </div>
+    <table style="font-size:11.5px">
+      <tr>
+        <th>Tiêu chí</th>
+        <th style="text-align:center">Odoo (tiếp tục)</th>
+        <th style="text-align:center;background:#0D7A8A">Opera Cloud ✓</th>
+      </tr>
+      <tr><td>OTA Certification (Booking.com, Agoda)</td><td style="text-align:center"><span class="badge b-red">❌</span></td><td style="text-align:center;background:#F0FDF4"><span class="badge b-green">✅ Native</span></td></tr>
+      <tr><td>Offline mode khi mất internet</td><td style="text-align:center"><span class="badge b-red">❌</span></td><td style="text-align:center;background:#F0FDF4"><span class="badge b-green">✅ Workstation</span></td></tr>
+      <tr><td>OHIP API cho custom integration</td><td style="text-align:center"><span class="badge b-red">❌</span></td><td style="text-align:center;background:#F0FDF4"><span class="badge b-green">✅ $0 Hotelier</span></td></tr>
+      <tr><td>Multi-property central config</td><td style="text-align:center"><span class="badge b-red">❌</span></td><td style="text-align:center;background:#F0FDF4"><span class="badge b-green">✅ Oracle Central</span></td></tr>
+      <tr><td>E-invoice tích hợp (Viettel, Fast)</td><td style="text-align:center"><span class="badge b-gold">Custom build</span></td><td style="text-align:center;background:#F0FDF4"><span class="badge b-green">✅ OFIS native</span></td></tr>
+      <tr><td>Chi phí tổng thể / năm</td><td style="text-align:center"><span class="badge b-gold">Không rõ</span></td><td style="text-align:center;background:#F0FDF4"><span class="badge b-teal">7.2–8.2 tỷ</span></td></tr>
+    </table>
+  </div>
+  <span class="slide-n">04 / 14</span>
+</div>
+
+<!-- ══ SLIDE 5: ARCHITECTURE ══ -->
+<div class="slide">
+  <div class="sh sh-dark"><div class="num num-teal">4</div><h2>Kiến trúc Tích hợp — MVL × Opera Cloud</h2><span class="stag">Architecture</span></div>
+  <div class="sb-dark">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px">
+      <div>
+        <div style="font-size:11px;font-weight:700;color:rgba(255,255,255,.7);text-transform:uppercase;letter-spacing:1px;margin-bottom:10px">MVL Clients Layer</div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px">
+          <div class="mod" style="flex:1"><div class="mi">🌐</div><div class="mn">Web</div><div class="ms">Direct booking</div></div>
+          <div class="mod" style="flex:1"><div class="mi">📱</div><div class="mn">App</div><div class="ms">Loyalty & booking</div></div>
+          <div class="mod" style="flex:1"><div class="mi">📝</div><div class="mn">CMS</div><div class="ms">Strapi / House Guide</div></div>
+        </div>
+        <div style="font-size:11px;font-weight:700;color:rgba(255,255,255,.7);text-transform:uppercase;letter-spacing:1px;margin-bottom:10px">MVL Backend Services</div>
+        <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px">
+          <span style="background:rgba(255,255,255,.08);border-radius:6px;padding:5px 9px;font-size:10.5px;color:#BAE6FD;font-weight:600">Booking Adapter</span>
+          <span style="background:rgba(255,255,255,.08);border-radius:6px;padding:5px 9px;font-size:10.5px;color:#BAE6FD;font-weight:600">Booking Service</span>
+          <span style="background:rgba(255,255,255,.08);border-radius:6px;padding:5px 9px;font-size:10.5px;color:#BAE6FD;font-weight:600">User Service</span>
+          <span style="background:rgba(255,255,255,.08);border-radius:6px;padding:5px 9px;font-size:10.5px;color:#BAE6FD;font-weight:600">Promotion</span>
+          <span style="background:rgba(255,255,255,.08);border-radius:6px;padding:5px 9px;font-size:10.5px;color:#BAE6FD;font-weight:600">Notification</span>
+          <span style="background:rgba(255,255,255,.08);border-radius:6px;padding:5px 9px;font-size:10.5px;color:#F5D0FE;font-weight:600">Payment (Partner)</span>
+          <span style="background:rgba(255,255,255,.08);border-radius:6px;padding:5px 9px;font-size:10.5px;color:#F5D0FE;font-weight:600">Invoice (Partner)</span>
+          <span style="background:rgba(255,255,255,.08);border-radius:6px;padding:5px 9px;font-size:10.5px;color:#F5D0FE;font-weight:600">CRM (HubSpot)</span>
+        </div>
+        <div style="font-size:11px;font-weight:700;color:rgba(255,255,255,.7);text-transform:uppercase;letter-spacing:1px;margin-bottom:10px">Distribution</div>
+        <div style="display:flex;gap:8px">
+          <div class="mod" style="flex:1"><div class="mi">🔗</div><div class="mn">Hotellink</div><div class="ms">OTA + Travel Agent</div></div>
+          <div class="mod" style="flex:1;opacity:.4"><div class="mi">🚫</div><div class="mn">Opera Distribution</div><div class="ms">Không dùng</div></div>
+        </div>
+      </div>
+      <div>
+        <div style="font-size:11px;font-weight:700;color:rgba(255,255,255,.7);text-transform:uppercase;letter-spacing:1px;margin-bottom:10px">MVL × Opera Communication Layer</div>
+        <div style="background:#FFFBEB;border:1px solid #FDE68A;border-radius:10px;padding:14px 16px;margin-bottom:14px">
+          <div style="font-size:13px;font-weight:800;color:#F0B429;margin-bottom:8px">🔌 PMS Integration Service</div>
+          <div style="font-size:11px;color:#1E293B;line-height:1.8">
+            <div>REST + OAuth 2.0 + JWT</div>
+            <div>OHIP: PAR · RSV · CRM · Cashiering · AR · Inventory</div>
+            <div>Rate limit: 50 req/s per environment (70 env)</div>
+          </div>
+        </div>
+        <div style="background:rgba(255,255,255,.05);border:2px solid #F0B429;border-radius:10px;padding:14px 16px;margin-bottom:14px">
+          <div style="font-size:13px;font-weight:800;color:#F0B429;margin-bottom:6px">☁ Oracle OPERA Cloud</div>
+          <div style="display:flex;gap:6px;flex-wrap:wrap">
+            <span style="background:rgba(212,160,23,.15);border-radius:5px;padding:3px 8px;font-size:10px;color:#F0B429;font-weight:600">PMS Foundation</span>
+            <span style="background:rgba(212,160,23,.15);border-radius:5px;padding:3px 8px;font-size:10px;color:#F0B429;font-weight:600">OFIS E-Invoice</span>
+            <span style="background:rgba(212,160,23,.15);border-radius:5px;padding:3px 8px;font-size:10px;color:#F0B429;font-weight:600">Oracle Central</span>
+            <span style="background:rgba(212,160,23,.15);border-radius:5px;padding:3px 8px;font-size:10px;color:#F0B429;font-weight:600">70 Environments</span>
+          </div>
+        </div>
+        <div style="background:#FFFBEB;border:1px solid #FDE68A;border-radius:10px;padding:14px 16px">
+          <div style="font-size:13px;font-weight:800;color:#F0B429;margin-bottom:6px">📊 Data Warehouse</div>
+          <div style="font-size:11px;color:#1E293B">OHIP Streaming (WebSocket) → BigQuery (asia-southeast1) → Looker Studio · $0 Hotelier track</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <span class="slide-n">05 / 14</span>
+</div>
+
+<!-- ══ SLIDE 6: SO SÁNH PHƯƠNG ÁN CHANNEL ══ -->
+<div class="slide">
+  <div class="sh sh-navy"><div class="num num-gold">5</div><h2>So sánh 3 Phương án — Channel Manager & Distribution</h2><span class="stag">Cost Analysis</span></div>
+  <div class="sb" style="padding:22px 36px">
+    <div class="g3" style="margin-bottom:16px;gap:14px">
+      <!-- PA1 -->
+      <div class="pa-card" style="background:#EFF6FF;border:1px solid #E5E7EB">
+        <div style="font-size:11px;font-weight:800;color:#1D4ED8;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px">📡 Phương án 1</div>
+        <div style="font-size:16px;font-weight:900;color:var(--navy);margin-bottom:4px">Full Opera</div>
+        <div style="font-size:11.5px;color:var(--gray);margin-bottom:12px">Opera Distribution thay Hotellink</div>
+        <div style="font-size:11.5px;color:var(--text-dark);line-height:1.8">
+          <div>✅ 1 vendor duy nhất cho OTA</div>
+          <div>✅ Native integration với Opera</div>
+          <div>❌ Không cover Travel Agent</div>
+          <div>❌ Chi phí cao nhất</div>
+          <div>❌ Bỏ Hotellink → migration thêm</div>
+        </div>
+        <div style="margin-top:12px;background:#DBEAFE;border-radius:8px;padding:10px 12px">
+          <div style="font-size:10.5px;color:#1D4ED8;font-weight:600">Chi phí/năm</div>
+          <div style="font-size:20px;font-weight:900;color:#1E40AF">~8.2 tỷ VND</div>
+          <div style="font-size:10px;color:#64748B">Opera PMS + Distribution license</div>
+        </div>
+      </div>
+      <!-- PA2 -->
+      <div class="pa-card" style="background:#F0FDF4;border:1px solid #D1FAE5;position:relative">
+        <div style="font-size:11px;font-weight:800;color:var(--success);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px">🔗 Phương án 2</div>
+        <div style="font-size:16px;font-weight:900;color:var(--navy);margin-bottom:4px">Hybrid — Giữ Hotellink</div>
+        <div style="font-size:11.5px;color:var(--gray);margin-bottom:12px">Opera PMS + Hotellink tiếp tục</div>
+        <div style="font-size:11.5px;color:var(--text-dark);line-height:1.8">
+          <div>✅ Cover cả OTA + Travel Agent</div>
+          <div>✅ Hotellink đang ổn định</div>
+          <div>✅ Tiết kiệm 2.48 tỷ license Opera Distribution</div>
+          <div>✅ Ít rủi ro nhất trong migration</div>
+          <div>⚠ MVL dev phải tự build Integration Service</div>
+          <div>⚠ Hoặc để Hotellink build: ~1.5 tỷ/năm cho request</div>
+        </div>
+        <div style="margin-top:12px;background:#DCFCE7;border-radius:8px;padding:10px 12px">
+          <div style="font-size:10.5px;color:var(--success);font-weight:600">Chi phí/năm</div>
+          <div style="font-size:20px;font-weight:900;color:#166534">~7.2 tỷ VND</div>
+          <div style="font-size:10px;color:#64748B">Opera Foundation + Hotellink connection</div>
+        </div>
+      </div>
+      <!-- PA3 -->
+      <div class="pa-card" style="background:#FFF7ED;border:2px solid #FED7AA">
+        <div style="font-size:11px;font-weight:800;color:var(--orange,#C55A11);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px">🔄 Phương án 3</div>
+        <div style="font-size:16px;font-weight:900;color:var(--navy);margin-bottom:4px">SiteMinder</div>
+        <div style="font-size:11.5px;color:var(--gray);margin-bottom:12px">Thay Hotellink bằng SiteMinder</div>
+        <div style="font-size:11.5px;color:var(--text-dark);line-height:1.8">
+          <div>✅ SiteMinder GDS có Travel Agent</div>
+          <div>✅ Tích hợp tốt với Opera</div>
+          <div>❌ MVL Web/App phải migration sang SiteMinder → thêm effort</div>
+          <div>❌ ~1.5 tỷ/năm cho connection request (tương tự Hotellink)</div>
+          <div>❌ Toàn bộ OTA + Travel Agent phải setup & kết nối lại từ đầu</div>
+        </div>
+        <div style="margin-top:12px;background:#FEF3C7;border-radius:8px;padding:10px 12px">
+          <div style="font-size:10.5px;color:#92400E;font-weight:600">Chi phí/năm</div>
+          <div style="font-size:20px;font-weight:900;color:#92400E">~6.9–7.7 tỷ VND</div>
+          <div style="font-size:10px;color:#64748B">Opera Foundation + SiteMinder (~1.2–2 tỷ)</div>
+        </div>
+      </div>
+    </div>
+    <table style="font-size:11.5px">
+      <tr>
+        <th>Tiêu chí so sánh</th>
+        <th style="text-align:center">PA1 — Full Opera</th>
+        <th style="text-align:center;background:#0D7A8A">PA2 — Hybrid ✓</th>
+        <th style="text-align:center">PA3 — SiteMinder</th>
+      </tr>
+      <tr><td>Cover Travel Agent</td><td style="text-align:center"><span class="badge b-red">❌ Không</span></td><td style="text-align:center"><span class="badge b-green">✅ Có</span></td><td style="text-align:center"><span class="badge b-green">✅ Có (GDS)</span></td></tr>
+      <tr><td>Rủi ro migration</td><td style="text-align:center"><span class="badge b-red">Cao</span></td><td style="text-align:center"><span class="badge b-green">Thấp</span></td><td style="text-align:center"><span class="badge b-gold">Trung bình</span></td></tr>
+      <tr><td>Chi phí năm đầu</td><td style="text-align:center"><span class="badge b-red">~8.2 tỷ</span></td><td style="text-align:center"><span class="badge b-green">~7.2 tỷ</span></td><td style="text-align:center"><span class="badge b-gold">~6.9–7.7 tỷ</span></td></tr>
+      <tr><td>Thời gian triển khai thêm</td><td style="text-align:center"><span class="badge b-gold">+4–6 tuần</span></td><td style="text-align:center"><span class="badge b-gold">+5–6 tháng (nếu MVL build)</span></td><td style="text-align:center"><span class="badge b-gold">+8–12 tuần</span></td></tr>
+    </table>
+  </div>
+  <span class="slide-n">06 / 14</span>
+</div>
+
+<!-- ══ SLIDE 7: SO SÁNH PHƯƠNG ÁN TRIỂN KHAI ══ -->
+<div class="slide">
+  <div class="sh sh-navy"><div class="num num-gold">6</div><h2>So sánh Phương án Triển khai — Rollout Strategy</h2><span class="stag">Deployment Strategy</span></div>
+  <div class="sb">
+    <div class="g3" style="margin-bottom:16px;gap:13px">
+      <div style="background:#FEF2F2;border-radius:10px;padding:16px 18px;border:2px solid #FECACA">
+        <div style="font-size:11px;font-weight:800;color:#DC2626;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px">⚡ Big Bang</div>
+        <div style="font-size:15px;font-weight:800;color:var(--navy);margin-bottom:6px">Toàn bộ 70 property cùng lúc</div>
+        <div style="font-size:11.5px;color:var(--text-mid);line-height:1.8;margin-bottom:10px">
+          <div>✅ Nhanh nhất về tổng thời gian</div>
+          <div>✅ Đồng nhất data từ ngày 1</div>
+          <div>🔴 Rủi ro cao nhất — 70 site cùng go-live</div>
+          <div>🔴 Cần 70+ consultant on-site đồng thời</div>
+          <div>🔴 Nếu lỗi → toàn hệ thống bị ảnh hưởng</div>
+          <div>🔴 Không thực tế với 70 properties</div>
+        </div>
+        <div style="background:#FEE2E2;border-radius:6px;padding:8px 10px;font-size:11px;color:#991B1B;font-weight:600">Không khuyến nghị — rủi ro quá cao</div>
+      </div>
+      <div style="background:#F0FDF4;border-radius:10px;padding:16px 18px;border:1px solid #D1FAE5;position:relative">
+        <div style="font-size:11px;font-weight:800;color:var(--success);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px">🚀 Pilot-First Phased</div>
+        <div style="font-size:15px;font-weight:800;color:var(--navy);margin-bottom:6px">Pilot 1–2 prop → rollout 68–69 prop còn lại</div>
+        <div style="font-size:11.5px;color:var(--text-mid);line-height:1.8;margin-bottom:10px">
+          <div>✅ Pilot 1–2 property đầu → validate config & quy trình</div>
+          <div>✅ Học từ pilot → chuẩn hóa template trước rollout rộng</div>
+          <div>✅ Giảm rủi ro đáng kể so với Big Bang</div>
+          <div>✅ Team tích lũy kinh nghiệm từ pilot</div>
+          <div>✅ Partner (Partner) đề xuất: <strong>29 man-days</strong> cho toàn bộ triển khai</div>
+          <div>✅ Phù hợp với lộ trình Partner đề xuất</div>
+        </div>
+        <div style="background:#DCFCE7;border-radius:6px;padding:8px 10px;font-size:11px;color:#1E293B;font-weight:600">29 man-days (Partner) · Timeline: ~12–15 tháng cho 70 properties</div>
+      </div>
+      <div style="background:#FFFBEB;border-radius:10px;padding:16px 18px;border:1px solid #FDE68A">
+        <div style="font-size:11px;font-weight:800;color:#92400E;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px">🗺 Cluster Province</div>
+        <div style="font-size:15px;font-weight:800;color:var(--navy);margin-bottom:6px">Rollout theo tỉnh/cụm địa lý</div>
+        <div style="font-size:11.5px;color:var(--text-mid);line-height:1.8;margin-bottom:10px">
+          <div>✅ Field team di chuyển hiệu quả hơn</div>
+          <div>✅ Tập trung nguồn lực theo vùng</div>
+          <div>⚠ Phụ thuộc vào phân bổ property theo tỉnh</div>
+          <div>⚠ Tỉnh có ít property → lãng phí chuyến di chuyển</div>
+          <div>⚠ Mỗi tỉnh có thể có tốc độ khác nhau</div>
+          <div>⚠ Phối hợp giữa các cụm phức tạp hơn</div>
+        </div>
+        <div style="background:#FEF3C7;border-radius:6px;padding:8px 10px;font-size:11px;color:#92400E;font-weight:600">Có thể kết hợp với Pilot-First</div>
+      </div>
+    </div>
+    <div class="card c-teal" style="padding:12px 18px">
+      <div style="display:flex;gap:20px;align-items:center">
+        <div style="font-size:13px;font-weight:700;color:var(--teal);min-width:200px">🎯 Khuyến nghị kết hợp</div>
+        <div style="font-size:12px;color:var(--text-mid)"><strong>Pilot-First + Cluster:</strong> Pilot 1–2 property đại diện → validate config & chuẩn hóa template → rollout theo cụm địa lý → field team di chuyển hiệu quả → tổng ~12–15 tháng cho 70 properties · Partner đề xuất <strong>29 man-days</strong> triển khai</div>
+      </div>
+    </div>
+  </div>
+  <span class="slide-n">07 / 14</span>
+</div>
+
+<!-- ══ SLIDE 8: LỘ TRÌNH ══ -->
+<div class="slide">
+  <div class="sh sh-navy"><div class="num num-gold">7</div><h2>Lộ trình Triển khai Đề xuất — 12–15 Tháng</h2><span class="stag">Implementation Roadmap</span></div>
+  <div class="sb" style="padding-top:18px;padding-bottom:16px">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+      <div>
+        <div class="tl-item">
+          <div class="tl-left">
+            <div class="tl-dot" style="background:#9CA3AF"></div>
+            <div class="tl-line"></div>
+            <div class="tl-ph" style="color:#F97316">PHASE 0</div>
+          </div>
+          <div class="tl-box">
+            <h4>Chuẩn bị & Partner Sign-off</h4>
+            <p style="color:#1E293B">Review WBS, ký Interface Agreement với Partner, Oracle sandbox access, export Odoo DB, Finance xác nhận revenue split. BOD phê duyệt phương án & ngân sách.</p>
+            <span class="tl-dur" style="background:#FEEBC8;color:#EA580C">T6–T7/2026 · 4–6 tuần</span>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-left">
+            <div class="tl-dot" style="background:#D4960A"></div>
+            <div class="tl-line"></div>
+            <div class="tl-ph" style="color:#D4960A">PHASE 1</div>
+          </div>
+          <div class="tl-box">
+            <h4>Dev tích hợp — MVL build các service</h4>
+            <p>MVL phát triển toàn bộ PMS Integration Service, Booking Adapter, User, Loyalty, Notification, Promotion. Song song: Partner tích hợp Payment (VNPay/OnePay) & Invoice (Fast ERP/Viettel) với Opera.</p>
+            <span class="tl-dur" style="background:#FEE2E2;color:#991B1B">⏳ Pending dev estimation</span>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-left">
+            <div class="tl-dot" style="background:#D97706"></div>
+            <div class="tl-line"></div>
+            <div class="tl-ph" style="color:#D97706">PHASE 2</div>
+          </div>
+          <div class="tl-box">
+            <h4>Data Migration Review & Chuẩn bị Pilot</h4>
+            <p>Export Odoo data, Partner xử lý migration file, Finance validate revenue split theo từng hạng mục tài khoản. UAT integration services. Chuẩn bị Opera config master template cho 1–2 property pilot.</p>
+            <span class="tl-dur" style="background:#FEE2E2;color:#991B1B">⏳ Pending dev estimation</span>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="tl-item">
+          <div class="tl-left">
+            <div class="tl-dot" style="background:#D4960A"></div>
+            <div class="tl-line"></div>
+            <div class="tl-ph" style="color:#D4960A">PHASE 3</div>
+          </div>
+          <div class="tl-box">
+            <h4>Pilot Go-live — 1–2 Properties</h4>
+            <p>Go-live 1–2 property pilot (29 MD Partner on-site). Downtime vài tiếng, lên lịch sáng sớm thứ Hai. Validate toàn bộ luồng thực tế: đặt phòng, check-in, thanh toán, hóa đơn, ARI sync.</p>
+            <span class="tl-dur" style="background:#FEE0C0;color:#F97316">Đầu năm 2027</span>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-left">
+            <div class="tl-dot" style="background:#D4960A"></div>
+            <div class="tl-line"></div>
+            <div class="tl-ph" style="color:#D4960A">PHASE 4</div>
+          </div>
+          <div class="tl-box">
+            <h4>Rollout — 68–69 Properties + các service còn lại</h4>
+            <p>Rollout theo cụm tỉnh sau khi pilot ổn định. Áp dụng master template đã chuẩn hóa, migrate data từng batch. Training FO/housekeeping tại từng property. Mỗi property downtime vài tiếng khi cutover.</p>
+            <span class="tl-dur" style="background:#FEE0C0;color:#F97316">T1–T6/2027 · 6–8 tháng</span>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-left">
+            <div class="tl-dot" style="background:#16A34A"></div>
+            <div class="tl-ph" style="color:#16A34A">CLOSE</div>
+          </div>
+          <div class="tl-box">
+            <h4>Project Close-out & Hypercare</h4>
+            <p>Go-live sign-off 70/70 properties, monitoring live, Odoo sunset hoàn toàn, FnB (P3), performance optimization.</p>
+            <span class="tl-dur" style="background:#FEEBC8;color:#EA580C">T7/2027 · Project complete</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <span class="slide-n">08 / 14</span>
+</div>
+
+<!-- ══ SLIDE 9: CHI PHÍ TỔNG HỢP ══ -->
+<div class="slide">
+  <div class="sh sh-dark"><div class="num num-teal">8</div><h2>Chi phí Triển khai — Số liệu thực từ Partner Quote</h2><span class="stag">Cost Breakdown</span></div>
+  <div class="sb-dark" style="padding:22px 36px">
+    <div class="g2" style="gap:20px">
+      <div>
+        <div style="font-size:11px;font-weight:700;color:rgba(255,255,255,.7);text-transform:uppercase;letter-spacing:1px;margin-bottom:10px">Opera Cloud License & Services (năm)</div>
+        <table style="font-size:11px">
+          <tr><th style="background:#1A1A1A;font-size:10px">Hạng mục</th><th style="background:#1A1A1A;text-align:right;font-size:10px">Giá trị</th></tr>
+          <tr><td style="color:#F1F5F9;background:#1A1A2E">PMS Foundation (3,000 rooms × 12 tháng)</td><td style="text-align:right;color:#F0B429;font-weight:700">3,816,000,000</td></tr>
+          <tr><td style="color:#E2E8F0">Distribution — nếu dùng PA1 (3,000 × 12)</td><td style="text-align:right;color:#FCA5A5;font-weight:700">2,480,400,000</td></tr>
+          <tr><td style="color:#1E293B">OFIS E-Invoice (70 property, one-time)</td><td style="text-align:right;color:#F0B429;font-weight:700">504,000,000</td></tr>
+          <tr><td style="color:#E2E8F0">OHIP Consulting (15 MD)</td><td style="text-align:right;color:#F0B429;font-weight:700">166,804,800</td></tr>
+          <tr><td style="color:#1E293B">Train the Trainer (5 MD)</td><td style="text-align:right;color:#F0B429;font-weight:700">55,601,600</td></tr>
+          <tr><td style="color:#E2E8F0">OFIS Maintenance (70 prop/năm)</td><td style="text-align:right;color:#F0B429;font-weight:700">490,000,000</td></tr>
+          <tr><td style="color:#1E293B;font-weight:700">Tổng trước thuế</td><td style="text-align:right;color:#FBD38D;font-weight:700">5,032,406,400</td></tr>
+          <tr><td style="color:#FCD34D;font-weight:700">Tổng sau thuế (VAT 8%+10%)</td><td style="text-align:right;color:#FCD34D;font-weight:700">~5.5 tỷ VND</td></tr>
+        </table>
+        <div style="margin-top:10px;background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.3);border-radius:6px;padding:8px 12px;font-size:10.5px;color:#FCA5A5">
+          ⚠ PA1 thêm Distribution: +2.48 tỷ → tổng ~8.2 tỷ/năm sau thuế
+        </div>
+      </div>
+      <div>
+        <div style="font-size:11px;font-weight:700;color:rgba(255,255,255,.7);text-transform:uppercase;letter-spacing:1px;margin-bottom:10px">So sánh tổng chi phí hàng năm</div>
+        <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:14px">
+          <div>
+            <div style="display:flex;justify-content:space-between;margin-bottom:4px">
+              <span style="font-size:11.5px;color:#FFFFFF;font-weight:600">PA1 — Full Opera (có Distribution)</span>
+              <span style="font-size:12px;font-weight:800;color:#FCA5A5">~8.2 tỷ</span>
+            </div>
+            <div style="background:rgba(255,255,255,.1);border-radius:4px;height:14px">
+              <div style="width:100%;height:100%;background:#EF4444;border-radius:4px"></div>
+            </div>
+          </div>
+          <div>
+            <div style="display:flex;justify-content:space-between;margin-bottom:4px">
+              <span style="font-size:11.5px;color:#FFFFFF;font-weight:600">PA2 — Hybrid (Hotellink + request)</span>
+              <span style="font-size:12px;font-weight:800;color:#6EE7B7">~7.2 tỷ ✓</span>
+            </div>
+            <div style="background:rgba(255,255,255,.1);border-radius:4px;height:14px">
+              <div style="width:88%;height:100%;background:#10B981;border-radius:4px"></div>
+            </div>
+          </div>
+          <div>
+            <div style="display:flex;justify-content:space-between;margin-bottom:4px">
+              <span style="font-size:11.5px;color:#FFFFFF;font-weight:600">PA3 — SiteMinder</span>
+              <span style="font-size:12px;font-weight:800;color:#FCD34D">~6.9–7.7 tỷ</span>
+            </div>
+            <div style="background:rgba(255,255,255,.1);border-radius:4px;height:14px">
+              <div style="width:94%;height:100%;background:#F59E0B;border-radius:4px"></div>
+            </div>
+          </div>
+        </div>
+        <div style="font-size:11px;font-weight:700;color:rgba(255,255,255,.7);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px">Chi phí khác (hàng năm)</div>
+        <table style="font-size:11px">
+          <tr><th style="background:#1A1A1A;font-size:10px">Hạng mục</th><th style="background:#1A1A1A;text-align:right;font-size:10px">Năm/VND</th></tr>
+          <tr><td style="color:#1E293B">Hotellink (2,180 rooms hiện tại)</td><td style="text-align:right;color:#F0B429">575,484,000</td></tr>
+          <tr><td style="color:#E2E8F0">Hotellink-Opera connection request (~4.75M req/tháng)</td><td style="text-align:right;color:#FCA5A5">~1,530,000,000</td></tr>
+          <tr><td style="color:#1E293B">SiteMinder (nếu PA3, ước tính)</td><td style="text-align:right;color:#FCD34D">1,200–2,000M</td></tr>
+        </table>
+        <div style="margin-top:8px;font-size:10px;color:rgba(255,255,255,.65)">* Connection request Hotellink-Opera cần confirm với Partner về pricing thực tế</div>
+      </div>
+    </div>
+  </div>
+  <span class="slide-n">09 / 14</span>
+</div>
+
+<!-- ══ SLIDE 10: ORG CHART ══ -->
+<div class="slide">
+  <div class="sh sh-navy"><div class="num num-gold">9</div><h2>Cơ cấu Tổ chức Đội Triển khai</h2><span class="stag">Team Structure</span></div>
+  <div class="sb" style="padding-top:16px;padding-bottom:14px">
+    <div style="display:flex;flex-direction:column;align-items:center">
+      <!-- L1 -->
+      <div class="org-box org-top">🏆 Program Director (1 người)</div>
+      <div class="org-con"></div>
+
+      <!-- L2 row -->
+      <div style="display:flex;gap:14px;align-items:flex-start;justify-content:center;width:100%">
+
+        <!-- PMO -->
+        <div style="display:flex;flex-direction:column;align-items:center">
+          <div class="org-box org-mid" style="white-space:nowrap;font-size:11px">📋 PMO Lead</div>
+          <div class="org-con"></div>
+          <div class="org-box org-sub" style="font-size:10.5px">PM Wave<div class="org-sub-lb">Quản lý batches</div></div>
+        </div>
+
+        <div style="width:1px;background:#CBD5E1;height:60px;align-self:flex-start;margin-top:16px"></div>
+
+        <!-- Solution Architect -->
+        <div style="display:flex;flex-direction:column;align-items:center">
+          <div class="org-box org-mid" style="white-space:nowrap;font-size:11px">🏗 Solution Architect</div>
+          <div class="org-con"></div>
+          <div style="display:flex;gap:6px">
+            <div class="org-box org-sub" style="font-size:10.5px;text-align:center">MVL Solution Arch<div class="org-sub-lb">OHIP + PMS Integration</div></div>
+            <div class="org-box org-sub" style="font-size:10.5px;text-align:center;border-color:#DD6B20;color:#EA580C">Opera Consultant Technical<div class="org-sub-lb">Oracle OHIP expert</div></div>
+          </div>
+        </div>
+
+        <div style="width:1px;background:#CBD5E1;height:60px;align-self:flex-start;margin-top:16px"></div>
+
+        <!-- Config Lead -->
+        <div style="display:flex;flex-direction:column;align-items:center">
+          <div class="org-box org-mid" style="white-space:nowrap;font-size:11px">⚙ Config Lead</div>
+          <div class="org-con"></div>
+          <div style="display:flex;gap:6px">
+            <div class="org-box org-sub" style="font-size:10.5px;text-align:center;border-color:#DD6B20;color:#EA580C">Opera Technical<div class="org-sub-lb">Opera config, OFIS</div></div>
+            <div class="org-box org-sub" style="font-size:10.5px;text-align:center">MVL Engineering<div class="org-sub-lb">Integration build</div></div>
+          </div>
+        </div>
+
+        <div style="width:1px;background:#CBD5E1;height:60px;align-self:flex-start;margin-top:16px"></div>
+
+        <!-- Training Lead -->
+        <div style="display:flex;flex-direction:column;align-items:center">
+          <div class="org-box org-mid" style="white-space:nowrap;font-size:11px;background:#714B67">📚 Training Lead (Partner)</div>
+          <div class="org-con"></div>
+          <div style="display:flex;gap:6px">
+            <div class="org-box org-sub" style="font-size:10.5px;text-align:center;border-color:#DD6B20;color:#EA580C">Trainers<div class="org-sub-lb">North · South</div></div>
+            <div class="org-box org-sub" style="font-size:10.5px;text-align:center">Đại diện phòng ban<div class="org-sub-lb">Điều phối liên phòng ban</div></div>
+          </div>
+        </div>
+
+      </div>
+
+      <div style="margin-top:14px;width:100%;height:2px;background:var(--light-gray)"></div>
+      <div style="margin-top:10px;font-size:11px;font-weight:700;color:var(--gray);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px">Field Teams (Rotate theo Batch · Cluster theo Tỉnh)</div>
+
+      <div style="display:flex;gap:11px;justify-content:center">
+        <div style="text-align:center"><div class="org-box" style="background:#FEF3C7;border:1px solid #F59E0B;color:#92400E;font-size:11px">Regional Managers</div><div class="org-sub-lb">Cluster North · South</div></div>
+        <div style="text-align:center"><div class="org-box" style="background:#FEF3C7;border:1px solid #F59E0B;color:#92400E;font-size:11px">Go-Live Coordinators (6–8)</div><div class="org-sub-lb">On-site 1–2 tuần/property</div></div>
+        <div style="text-align:center"><div class="org-box" style="background:#F0FDF4;border:1px solid #10B981;color:#065F46;font-size:11px">QA Lead + Tester (2)</div><div class="org-sub-lb">UAT, sign-off</div></div>
+        <div style="text-align:center"><div class="org-box" style="background:#F0FDF4;border:1px solid #10B981;color:#065F46;font-size:11px">Helpdesk L1-L2 (3)</div><div class="org-sub-lb">Post go-live 30 ngày</div></div>
+      </div>
+    </div>
+  </div>
+  <span class="slide-n">10 / 14</span>
+</div>
+
+<!-- ══ SLIDE 11: PHÂN CÔNG SCOPE ══ -->
+<div class="slide">
+  <div class="sh sh-navy"><div class="num num-gold">10</div><h2>Phân công Scope — MVL vs Partner</h2><span class="stag">Scope Assignment</span></div>
+  <div class="sb" style="padding:18px 34px">
+    <div class="g2" style="gap:16px">
+      <div>
+        <div style="background:var(--teal);color:#fff;border-radius:8px;padding:8px 14px;font-size:12px;font-weight:700;margin-bottom:10px">🔧 MVL Team — PMS Integration & Digital</div>
+        <table style="font-size:11.5px">
+          <tr><th style="font-size:10px">Service</th><th style="font-size:10px">Nội dung</th><th style="font-size:10px;text-align:center">P</th></tr>
+          <tr><td><strong>PMS Integration Service</strong></td><td>70+ API endpoints, Streaming Events, Voucher APIs</td><td style="text-align:center"><span class="badge b-red">P1</span></td></tr>
+          <tr><td><strong>Booking Adapter</strong></td><td>ARI Sync (Rate, Avail, Inventory) qua Hotellink</td><td style="text-align:center"><span class="badge b-red">P1</span></td></tr>
+          <tr><td><strong>Booking & Dynamic Pricing</strong></td><td>Pull Opera → Compute → RM Approve → Overwrite</td><td style="text-align:center"><span class="badge b-red">P1</span></td></tr>
+          <tr><td><strong>User & Loyalty</strong></td><td>SSO, Auth, Merge Profile, B2C/B2B Tier</td><td style="text-align:center"><span class="badge b-red">P1</span></td></tr>
+          <tr><td><strong>Promotion Service</strong></td><td>Campaign, Voucher lifecycle, Claim khi đặt phòng</td><td style="text-align:center"><span class="badge b-red">P1</span></td></tr>
+          <tr><td><strong>Notification</strong></td><td>Booking & Email (VI/EN), Device management</td><td style="text-align:center"><span class="badge b-red">P1</span></td></tr>
+          <tr><td><strong>Data Warehouse</strong></td><td>OHIP Streaming → BigQuery → Looker Studio</td><td style="text-align:center"><span class="badge b-teal">P2</span></td></tr>
+        </table>
+      </div>
+      <div>
+        <div style="background:#D4960A;color:#fff;border-radius:8px;padding:8px 14px;font-size:12px;font-weight:700;margin-bottom:10px">🏨 Partner — Opera Native & Migration</div>
+        <table style="font-size:11.5px">
+          <tr><th style="background:#1A1A1A;font-size:10px">Service</th><th style="background:#1A1A1A;font-size:10px">Nội dung</th><th style="background:#1A1A1A;font-size:10px;text-align:center">P</th></tr>
+          <tr><td><strong>Opera Configuration</strong></td><td>Master template, 70 property environments, workbook</td><td style="text-align:center"><span class="badge b-red">P1</span></td></tr>
+          <tr><td><strong>Data Migration</strong></td><td>Export Odoo → ETL → Revenue split → Opera import</td><td style="text-align:center"><span class="badge b-red">P1</span></td></tr>
+          <tr><td><strong>Payment Service</strong></td><td>OnePay, OCB, TPBank → Opera folio</td><td style="text-align:center"><span class="badge b-red">P1</span></td></tr>
+          <tr><td><strong>Invoice Service</strong></td><td>OFIS e-invoice → Fast ERP & Viettel</td><td style="text-align:center"><span class="badge b-red">P1</span></td></tr>
+          <tr><td><strong>Booking API</strong></td><td>Block reservation & rooming list Opera native</td><td style="text-align:center"><span class="badge b-red">P1</span></td></tr>
+          <tr><td><strong>OFIS Training</strong></td><td>Train the Trainer, Admin training, User training</td><td style="text-align:center"><span class="badge b-red">P1</span></td></tr>
+          <tr><td><strong>FnB</strong></td><td>Post Article (outlet nhỏ), Simphony (outlet lớn)</td><td style="text-align:center"><span class="badge b-gray">P3</span></td></tr>
+        </table>
+        <div style="margin-top:10px;background:#FEF3C7;border-radius:6px;padding:8px 12px;font-size:11px;color:#92400E">
+          ⚠ Interface Agreement MVL–Partner cần ký trước T7/2026: API spec, migration template, test environment
+        </div>
+      </div>
+    </div>
+  </div>
+  <span class="slide-n">11 / 14</span>
+</div>
+
+<!-- ══ SLIDE 12: RỦI RO ══ -->
+<div class="slide">
+  <div class="sh sh-navy"><div class="num num-gold">11</div><h2>Rủi ro Chính & Biện pháp Giảm thiểu</h2><span class="stag">Risk Management</span></div>
+  <div class="sb" style="padding:14px 34px">
+    <!-- Alert banner -->
+    <div style="background:#FFF5F5;border:1px solid #FECACA;border-radius:8px;padding:10px 16px;margin-bottom:12px;display:flex;align-items:center;gap:10px">
+      <span style="font-size:18px">🚨</span>
+      <div>
+        <div style="font-size:12.5px;font-weight:800;color:#991B1B">ALERT — Các vấn đề cần giải quyết ngay trước khi dự án có thể tiến hành</div>
+        <div style="font-size:11px;color:#B91C1C;margin-top:3px;line-height:1.6">
+          <span style="margin-right:16px">⛔ Dự án chưa có PMO</span>
+          <span style="margin-right:16px">⛔ Phương án triển khai chưa được duyệt chi phí</span>
+          <span style="margin-right:16px">⛔ Chưa có estimation thời gian code & tích hợp → chưa thể xác định ngày go-live</span>
+          <span>⛔ Engineering chưa có plan cụ thể về services, nhân sự & thời gian tích hợp</span>
+        </div>
+      </div>
+    </div>
+    <table style="font-size:11px">
+      <tr><th style="width:22%">Rủi ro</th><th style="width:8%;text-align:center">Mức độ</th><th style="width:35%">Biện pháp</th><th style="width:10%;text-align:center">Owner</th></tr>
+      <tr class="r-high"><td><strong>Chưa có PMO</strong> — dự án thiếu người quản lý điều phối toàn bộ</td><td style="text-align:center"><span class="badge b-red">Cao</span></td><td>Bổ nhiệm PMO ngay trước kick-off. PMO chịu trách nhiệm timeline, resource, escalation và weekly report cho BOD.</td><td style="text-align:center"><span class="badge b-teal">MVL</span></td></tr>
+      <tr class="r-high"><td><strong>Chi phí chưa được phê duyệt</strong> — không thể cam kết vendor hay resource</td><td style="text-align:center"><span class="badge b-red">Cao</span></td><td>BOD phê duyệt ngân sách trước T6/2026. Không ký hợp đồng Opera hay Partner khi chưa có approval.</td><td style="text-align:center"><span class="badge b-teal">MVL</span></td></tr>
+      <tr class="r-high"><td><strong>Chưa có dev estimation</strong> — không xác định được ngày go-live chính xác</td><td style="text-align:center"><span class="badge b-red">Cao</span></td><td>Engineering team cần deliver estimation cho từng service trước kick-off Phase 1. Timeline trong tài liệu này là định hướng — cần confirm sau khi có est.</td><td style="text-align:center"><span class="badge b-teal">MVL</span></td></tr>
+      <tr class="r-high"><td><strong>Engineering chưa có plan</strong> — chưa rõ services, nhân sự, thời gian tích hợp</td><td style="text-align:center"><span class="badge b-red">Cao</span></td><td>Yêu cầu Engineering deliver Technical Plan (services breakdown, team assignment, timeline estimate) song song với Phase 0 chuẩn bị.</td><td style="text-align:center"><span class="badge b-teal">MVL</span></td></tr>
+      <tr class="r-high"><td><strong>Opera API learning curve</strong> — sandbox khác Production, docs lag</td><td style="text-align:center"><span class="badge b-red">Cao</span></td><td>Yêu cầu sandbox access trước kick-off. 1–2 tuần đầu Phase 0 spike & validate API trước khi code.</td><td style="text-align:center"><span class="badge b-teal">MVL</span></td></tr>
+      <tr class="r-high"><td><strong>Partner delay API spec</strong> — PMS Integration Service bị block Payment/Invoice</td><td style="text-align:center"><span class="badge b-red">Cao</span></td><td>Interface Agreement ký trước T7/2026: deadline spec, test env, escalation path.</td><td style="text-align:center"><span class="badge b-purple">Partner</span></td></tr>
+      <tr class="r-high"><td><strong>Odoo revenue split</strong> — phân tách tài khoản doanh thu sai → sai báo cáo Opera</td><td style="text-align:center"><span class="badge b-red">Cao</span></td><td>Finance xác nhận mapping revenue category trước migration. Partner cung cấp template chuẩn. Pilot validate trước rollout.</td><td style="text-align:center"><span class="badge b-teal">MVL+Partner</span></td></tr>
+      <tr class="r-med"><td><strong>Resource overload</strong> — team vừa làm Opera vừa maintain hệ thống cũ</td><td style="text-align:center"><span class="badge b-gold">Trung bình</span></td><td>Dừng hoàn toàn Odoo development. Opera là priority 1.</td><td style="text-align:center"><span class="badge b-teal">MVL</span></td></tr>
+      <tr class="r-med"><td><strong>Chưa quyết định Channel Manager</strong> — Hotellink hay SiteMinder, ảnh hưởng đến toàn bộ integration plan</td><td style="text-align:center"><span class="badge b-gold">Trung bình</span></td><td>Ra quyết định chọn Channel Manager trước kick-off: cân nhắc cost + effort build Integration Service (PA2 Hotellink) so với chi phí connection của Partner và Opera (PA3 SiteMinder). Quyết định này ảnh hưởng trực tiếp đến scope của MVL Engineering.</td><td style="text-align:center"><span class="badge b-teal">MVL</span></td></tr>
+    </table>
+  </div>
+  <span class="slide-n">12 / 14</span>
+</div>
+
+<!-- ══ SLIDE 13: KPIs ══ -->
+<div class="slide">
+  <div class="sh sh-dark"><div class="num num-teal">12</div><h2>KPIs Dự án & Điều kiện Tiên quyết</h2><span class="stag">Success Metrics</span></div>
+  <div class="sb-dark">
+    <div class="g4" style="margin-bottom:18px">
+      <div class="kpi"><div class="kv">70/70</div><div class="kl">Properties go-live trong 12–15 tháng</div></div>
+      <div class="kpi"><div class="kv">0</div><div class="kl">Future reservation bị mất sau Odoo migration</div></div>
+      <div class="kpi"><div class="kv">&lt;1%</div><div class="kl">Sai lệch revenue split Odoo → Opera</div></div>
+      <div class="kpi"><div class="kv">&lt;5 phút</div><div class="kl">ARI sync lên OTA sau thay đổi rate</div></div>
+    </div>
+    <div class="g2" style="gap:18px">
+      <div>
+        <h3 style="color:#FFFFFF;margin-bottom:12px">✅ Điều kiện tiên quyết — trước T7/2026</h3>
+        <div style="display:flex;flex-direction:column;gap:8px">
+          <div style="background:#FEF2F2;border:2px solid #FCA5A5;border-radius:8px;padding:11px 14px;border-left:4px solid #EF4444">
+            <div style="display:flex;align-items:center;gap:6px;margin-bottom:3px">
+              <span style="font-size:14px">🚨</span>
+              <div style="font-size:12px;font-weight:800;color:#991B1B">Lập dự án chính thức & Ban điều hành dự án</div>
+              <span style="background:#EF4444;color:#fff;font-size:9px;font-weight:800;padding:2px 7px;border-radius:9px;letter-spacing:.5px;margin-left:auto">CRITICAL</span>
+            </div>
+            <div style="font-size:11px;color:#B91C1C">Nếu chưa thành lập → dự án không thể khởi động. Toàn bộ phòng ban phải aware và cam kết nguồn lực trước khi kick-off.</div>
+          </div>
+          <div style="background:#FEF2F2;border:2px solid #FCA5A5;border-radius:8px;padding:11px 14px;border-left:4px solid #EF4444">
+            <div style="display:flex;align-items:center;gap:6px;margin-bottom:3px">
+              <span style="font-size:14px">🚨</span>
+              <div style="font-size:12px;font-weight:800;color:#991B1B">Setup đội nhân sự chủ chốt</div>
+              <span style="background:#EF4444;color:#fff;font-size:9px;font-weight:800;padding:2px 7px;border-radius:9px;letter-spacing:.5px;margin-left:auto">CRITICAL</span>
+            </div>
+            <div style="font-size:11px;color:#B91C1C">Nếu chưa xác định → không có người điều phối dự án. Cần phân công: Program Director, PMO Lead, Solution Architect, Config Lead, đại diện phòng ban trước kick-off.</div>
+          </div>
+          <div style="background:#FFFBEB;border-radius:8px;padding:10px 14px;border:1px solid #FDE68A;border-left:3px solid #F0B429">
+            <div style="font-size:12px;font-weight:600;color:var(--gold-light);margin-bottom:2px">Opera PMS signed & OHIP credentials</div>
+            <div style="font-size:11px;color:#1E293B">Oracle sandbox environment khả dụng cho dev</div>
+          </div>
+          <div style="background:#FFF7ED;border-radius:8px;padding:10px 14px;border-left:3px solid #FDBA74">
+            <div style="font-size:12px;font-weight:600;color:var(--gold-light);margin-bottom:2px">Partner Interface Agreement ký xong</div>
+            <div style="font-size:11px;color:#1E293B">API spec Payment & Invoice + migration template</div>
+          </div>
+          <div style="background:#FFF5F5;border-radius:8px;padding:10px 14px;border:1px solid #FEE2E2;border-left:3px solid #DC2626">
+            <div style="font-size:12px;font-weight:600;color:#FCA5A5;margin-bottom:2px">Engineering phải có plan & timeline cụ thể</div>
+            <div style="font-size:11px;color:#B91C1C">Plan chi tiết từng service, timeline tích hợp và phân bổ resource cụ thể vào dự án — trước khi kick-off</div>
+          </div>
+          <div style="background:#F0FDF4;border-radius:8px;padding:10px 14px;border:1px solid #D1FAE5;border-left:3px solid #16A34A">
+            <div style="font-size:12px;font-weight:600;color:#6EE7B7;margin-bottom:2px">Hotellink tiếp tục vận hành bình thường</div>
+            <div style="font-size:11px;color:#1E293B">Confirm Hotellink-Opera connection pricing</div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <h3 style="color:#FFFFFF;margin-bottom:12px">📅 Mốc quan trọng cần cam kết</h3>
+        <table style="font-size:11px">
+          <tr><th style="background:#1A1A1A;font-size:10px">Milestone</th><th style="background:#1A1A1A;font-size:10px">Deadline</th><th style="background:#1A1A1A;font-size:10px;text-align:center">Owner</th></tr>
+          <tr><td style="color:#1E293B">Ký hợp đồng Opera Cloud</td><td style="color:#F0B429;font-weight:600">T6/2026</td><td style="text-align:center"><span class="badge b-teal" style="font-size:10px">MVL</span></td></tr>
+          <tr><td style="color:#E2E8F0">Interface Agreement với Partner</td><td style="color:#F0B429;font-weight:600">T6/2026</td><td style="text-align:center"><span class="badge b-purple" style="font-size:10px">Partner</span></td></tr>
+          <tr><td style="color:#1E293B">Oracle sandbox khả dụng</td><td style="color:#F0B429;font-weight:600">T7/2026 W1</td><td style="text-align:center"><span class="badge b-purple" style="font-size:10px">Partner</span></td></tr>
+          <tr><td style="color:#E2E8F0">Kick-off Phase 1 — Pilot 1–2 prop</td><td style="color:#F0B429;font-weight:600">T8/2026</td><td style="text-align:center"><span class="badge b-teal" style="font-size:10px">MVL+Partner</span></td></tr>
+          <tr><td style="color:#1E293B">Go-live Pilot 1–2 properties</td><td style="color:#F0B429;font-weight:600">T10/2026</td><td style="text-align:center"><span class="badge b-teal" style="font-size:10px">MVL+Partner</span></td></tr>
+          <tr><td style="color:#E2E8F0">70/70 properties go-live</td><td style="color:#FBD38D;font-weight:700">T7–T9/2027</td><td style="text-align:center"><span class="badge b-green" style="font-size:10px">All</span></td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+  <span class="slide-n">13 / 14</span>
+</div>
+
+<!-- ══ SLIDE 14: KẾT LUẬN ══ -->
+<div class="slide">
+  <div class="s-close">
+    <div style="font-size:11.5px;font-weight:700;color:#F0B429;text-transform:uppercase;letter-spacing:2px;margin-bottom:18px">Kết luận & Bước Tiếp theo</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-bottom:24px">
+      <div>
+        <h2 style="font-size:22px;font-weight:900;color:#fff;margin-bottom:14px;line-height:1.3">4 Quyết định cần phê duyệt <span style="color:#EA580C">ngay</span></h2>
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <div style="background:rgba(255,255,255,.07);border-radius:8px;padding:11px 14px;border-left:3px solid #F97316">
+            <div style="font-size:12.5px;font-weight:700;color:#FFFFFF">1. Chọn Phương án Channel Manager</div>
+            <div style="font-size:11px;color:#FFFFFF;margin-top:2px">PA1 (Opera Distribution) / PA2 (Hotellink) / PA3 (SiteMinder) → đề xuất PA2</div>
+          </div>
+          <div style="background:#FFFFFF;border-radius:8px;padding:11px 14px;border:1px solid #E5E7EB;border-left:3px solid #F0B429">
+            <div style="font-size:12.5px;font-weight:700;color:#1E293B">2. Phê duyệt ngân sách Opera Cloud</div>
+            <div style="font-size:11px;color:#1E293B;margin-top:2px">~8.2 tỷ VND sau thuế (PA2: ~7.2 tỷ + Hotellink connection)</div>
+          </div>
+          <div style="background:rgba(255,255,255,.07);border-radius:8px;padding:11px 14px;border-left:3px solid #ED8936">
+            <div style="font-size:12.5px;font-weight:700;color:#FFFFFF">3. Confirm Partner làm triển khai</div>
+            <div style="font-size:11px;color:#FFFFFF;margin-top:2px">Ký Interface Agreement trước T7/2026 — không trễ</div>
+          </div>
+          <div style="background:rgba(255,255,255,.07);border-radius:8px;padding:11px 14px;border-left:3px solid #E53E3E">
+            <div style="font-size:12.5px;font-weight:700;color:#FFFFFF">4. Dừng Odoo development chính thức</div>
+            <div style="font-size:11px;color:#FFFFFF;margin-top:2px">Dồn toàn bộ resource vào Opera migration từ T7/2026</div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <h2 style="font-size:18px;font-weight:700;color:#FFFFFF;margin-bottom:14px">📅 Timeline 90 ngày đầu (T6–T8/2026)</h2>
+        <div style="display:flex;flex-direction:column;gap:8px">
+          <div style="background:rgba(255,255,255,.06);border-radius:7px;padding:9px 13px;display:flex;justify-content:space-between;align-items:center">
+            <span style="font-size:11.5px;color:#FFFFFF">BOD phê duyệt phương án & ngân sách</span>
+            <span style="font-size:11px;font-weight:700;color:#F0B429">T6</span>
+          </div>
+          <div style="background:rgba(255,255,255,.06);border-radius:7px;padding:9px 13px;display:flex;justify-content:space-between;align-items:center">
+            <span style="font-size:11.5px;color:#FFFFFF">Ký hợp đồng Opera Cloud + Partner</span>
+            <span style="font-size:11px;font-weight:700;color:#F0B429">T6</span>
+          </div>
+          <div style="background:rgba(255,255,255,.06);border-radius:7px;padding:9px 13px;display:flex;justify-content:space-between;align-items:center">
+            <span style="font-size:11.5px;color:#FFFFFF">Export Odoo DB + Finance xác nhận revenue split</span>
+            <span style="font-size:11px;font-weight:700;color:#F0B429">T6</span>
+          </div>
+          <div style="background:rgba(255,255,255,.06);border-radius:7px;padding:9px 13px;display:flex;justify-content:space-between;align-items:center">
+            <span style="font-size:11.5px;color:#FFFFFF">Oracle sandbox + OHIP credentials setup</span>
+            <span style="font-size:11px;font-weight:700;color:#F0B429">T7</span>
+          </div>
+          <div style="background:rgba(255,255,255,.06);border-radius:7px;padding:9px 13px;display:flex;justify-content:space-between;align-items:center">
+            <span style="font-size:11.5px;color:#FFFFFF">Kick-off Phase 0 — Opera config + OHIP spike</span>
+            <span style="font-size:11px;font-weight:700;color:#F0B429">T7</span>
+          </div>
+          <div style="background:#F0FDF4;border-radius:7px;padding:9px 13px;display:flex;justify-content:space-between;align-items:center;border:1px solid #BBF7D0">
+            <span style="font-size:11.5px;color:#166534;font-weight:600">Kick-off Phase 1 — ASAP có estimation & thời gian go-live chính xác</span>
+            <span style="font-size:11px;font-weight:700;color:#6EE7B7">T8</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Summary stats -->
+    <div style="display:flex;gap:20px;padding-top:16px;border-top:1px solid #E5E7EB">
+      <div style="text-align:center"><div style="font-size:22px;font-weight:900;color:#F97316">PA2</div><div style="font-size:10px;color:#F97316;text-transform:uppercase;letter-spacing:1px">Khuyến nghị</div></div>
+      <div style="text-align:center"><div style="font-size:22px;font-weight:900;color:#F97316">~7.2 tỷ</div><div style="font-size:10px;color:#F97316;text-transform:uppercase;letter-spacing:1px">VND/năm</div></div>
+      <div style="text-align:center"><div style="font-size:22px;font-weight:900;color:#F97316">12–15</div><div style="font-size:10px;color:#F97316;text-transform:uppercase;letter-spacing:1px">Tháng rollout</div></div>
+      <div style="text-align:center"><div style="font-size:22px;font-weight:900;color:#F97316">70</div><div style="font-size:10px;color:#F97316;text-transform:uppercase;letter-spacing:1px">Properties</div></div>
+      <div style="text-align:center"><div style="font-size:22px;font-weight:900;color:#F97316">Pilot-First</div><div style="font-size:10px;color:#F97316;text-transform:uppercase;letter-spacing:1px">Rollout strategy</div></div>
+    </div>
+    <div class="bottom-stripe"></div>
+    <span class="slide-n">14 / 14</span>
+  </div>
+</div>
+
+</body>
+</html>
