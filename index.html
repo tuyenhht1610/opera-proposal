@@ -507,75 +507,121 @@
 
 <!-- ══ SLIDE 6: SO SÁNH PHƯƠNG ÁN CHANNEL ══ -->
 <div class="slide">
-  <div class="sh sh-navy"><div class="num num-gold">5</div><h2>So sánh 3 Phương án — Channel Manager & Distribution</h2><span class="stag">Cost Analysis</span></div>
-  <div class="sb" style="padding:22px 36px">
-    <div class="g3" style="margin-bottom:16px;gap:14px">
-      <!-- PA1 -->
-      <div class="pa-card" style="background:#EFF6FF;border:1px solid #E5E7EB">
-        <div style="font-size:11px;font-weight:800;color:#1D4ED8;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px">📡 Phương án 1</div>
-        <div style="font-size:16px;font-weight:900;color:var(--navy);margin-bottom:4px">Full Opera</div>
-        <div style="font-size:11.5px;color:var(--gray);margin-bottom:12px">Opera Distribution thay Hotellink</div>
-        <div style="font-size:11.5px;color:var(--text-dark);line-height:1.8">
-          <div>✅ 1 vendor duy nhất cho OTA</div>
+  <div class="sh sh-navy"><div class="num num-gold">5</div><h2>So sánh 4 Phương án — Channel Manager & Distribution</h2><span class="stag">Cost Analysis</span></div>
+  <div class="sb" style="padding:22px 30px">
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:11px;margin-bottom:14px">
+
+      <!-- PA1: Full Opera -->
+      <div style="background:#EFF6FF;border-radius:10px;padding:14px 16px;border:1px solid #BFDBFE">
+        <div style="font-size:10px;font-weight:800;color:#1D4ED8;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px">📡 Phương án 1</div>
+        <div style="font-size:14px;font-weight:900;color:var(--navy);margin-bottom:3px">Full Opera</div>
+        <div style="font-size:10.5px;color:var(--gray);margin-bottom:10px">Opera Distribution thay Hotellink</div>
+        <div style="font-size:10.5px;color:var(--text-dark);line-height:1.8">
           <div>✅ Native integration với Opera</div>
           <div>❌ Không cover Travel Agent</div>
           <div>❌ Bỏ Hotellink → migration thêm</div>
-          <div>❌ Toàn bộ OTA sẽ phải setup lại từ Opera Distribution</div>
+          <div>❌ Toàn bộ OTA setup lại từ Opera Distribution</div>
         </div>
-        <div style="margin-top:12px;background:#DBEAFE;border-radius:8px;padding:10px 12px">
-          <div style="font-size:10.5px;color:#1D4ED8;font-weight:600">Chi phí/năm</div>
-          <div style="font-size:20px;font-weight:900;color:#1E40AF">~8.2 tỷ VND</div>
-          <div style="font-size:10px;color:#64748B">Opera PMS + Distribution license</div>
+        <div style="margin-top:10px;background:#DBEAFE;border-radius:8px;padding:8px 10px">
+          <div style="font-size:9.5px;color:#1D4ED8;font-weight:600">Chi phí/năm</div>
+          <div style="font-size:17px;font-weight:900;color:#1E40AF">~8.2 tỷ VND</div>
+          <div style="font-size:9px;color:#64748B">Opera PMS + Distribution license</div>
         </div>
       </div>
-      <!-- PA2 -->
-      <div class="pa-card" style="background:#F0FDF4;border:1px solid #D1FAE5;position:relative">
-        <div style="font-size:11px;font-weight:800;color:var(--success);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px">🔗 Phương án 2</div>
-        <div style="font-size:16px;font-weight:900;color:var(--navy);margin-bottom:4px">Hybrid — Giữ Hotellink</div>
-        <div style="font-size:11.5px;color:var(--gray);margin-bottom:12px">Opera PMS + Hotellink tiếp tục</div>
-        <div style="font-size:11.5px;color:var(--text-dark);line-height:1.8">
+
+      <!-- PA2: Hotellink build -->
+      <div style="background:#F0FDF4;border-radius:10px;padding:14px 16px;border:1px solid #BBF7D0">
+        <div style="font-size:10px;font-weight:800;color:#16A34A;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px">🔗 Phương án 2A</div>
+        <div style="font-size:14px;font-weight:900;color:var(--navy);margin-bottom:3px">Hotellink Build</div>
+        <div style="font-size:10.5px;color:var(--gray);margin-bottom:10px">Hotellink build connection với Opera</div>
+        <div style="font-size:10.5px;color:var(--text-dark);line-height:1.8">
           <div>✅ Cover cả OTA + Travel Agent</div>
           <div>✅ Đang hoạt động ổn định</div>
-          <div>✅ Tiết kiệm 2.48 tỷ license Opera Distribution</div>
-          <div>❌ MVL phải tự dựng Integration Service — rất tốn effort</div>
-          <div>❌ Hoặc để Hotellink build: ~1.5 tỷ/năm cho connection request đến Opera</div>
-        </div>
-        <div style="margin-top:12px;background:#DCFCE7;border-radius:8px;padding:10px 12px">
-          <div style="font-size:10.5px;color:var(--success);font-weight:600">Chi phí/năm</div>
-          <div style="font-size:20px;font-weight:900;color:#166534">~7.2 tỷ VND</div>
-          <div style="font-size:10px;color:#64748B">Opera Foundation + Hotellink connection</div>
-        </div>
-      </div>
-      <!-- PA3 -->
-      <div class="pa-card" style="background:#FFF7ED;border:2px solid #FED7AA">
-        <div style="font-size:11px;font-weight:800;color:var(--orange,#C55A11);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px">🔄 Phương án 3</div>
-        <div style="font-size:16px;font-weight:900;color:var(--navy);margin-bottom:4px">SiteMinder</div>
-        <div style="font-size:11.5px;color:var(--gray);margin-bottom:12px">Thay Hotellink bằng SiteMinder</div>
-        <div style="font-size:11.5px;color:var(--text-dark);line-height:1.8">
-          <div>✅ Cover cả OTA + Travel Agent</div>
-          <div>✅ Tích hợp tốt với Opera — top 1 channel manager châu Á</div>
-          <div>✅ MVL Web/App không cần tích hợp SiteMinder — chỉ nhận allotment online direct từ Opera và bán</div>
+          <div>✅ Tiết kiệm 2.48 tỷ license Distribution</div>
+          <div>✅ MVL không cần tự build integration</div>
           <div>❌ ~1.5 tỷ/năm cho connection request đến Opera</div>
-          <div>❌ Toàn bộ OTA + Travel Agent phải setup & kết nối lại từ SiteMinder</div>
         </div>
-        <div style="margin-top:12px;background:#FEF3C7;border-radius:8px;padding:10px 12px">
-          <div style="font-size:10.5px;color:#92400E;font-weight:600">Chi phí/năm</div>
-          <div style="font-size:20px;font-weight:900;color:#92400E">~8.2 tỷ + SiteMinder</div>
-          <div style="font-size:10px;color:#64748B">Opera Foundation ~8.2 tỷ + chi phí SiteMinder (~1.2–2 tỷ/năm)</div>
+        <div style="margin-top:10px;background:#DCFCE7;border-radius:8px;padding:8px 10px">
+          <div style="font-size:9.5px;color:#16A34A;font-weight:600">Chi phí/năm</div>
+          <div style="font-size:17px;font-weight:900;color:#166534">~7.2 tỷ VND</div>
+          <div style="font-size:9px;color:#64748B">Opera Foundation + Hotellink connection</div>
         </div>
       </div>
+
+      <!-- PA3: MVL tự dựng -->
+      <div style="background:#FFFBEB;border-radius:10px;padding:14px 16px;border:1px solid #FDE68A">
+        <div style="font-size:10px;font-weight:800;color:#D97706;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px">🔧 Phương án 2B</div>
+        <div style="font-size:14px;font-weight:900;color:var(--navy);margin-bottom:3px">MVL Tự dựng</div>
+        <div style="font-size:10.5px;color:var(--gray);margin-bottom:10px">MVL build Integration Service</div>
+        <div style="font-size:10.5px;color:var(--text-dark);line-height:1.8">
+          <div>✅ Cover cả OTA + Travel Agent</div>
+          <div>✅ Tiết kiệm 2.48 tỷ license Distribution</div>
+          <div>⚠ Tự xử lý hoàn toàn integration logic</div>
+          <div>✅ Kết nối cả Hotellink + Web/App MVL</div>
+          <div>❌ Rất tốn effort — pending engineering est</div>
+        </div>
+        <div style="margin-top:10px;background:#FEF9C3;border-radius:8px;padding:8px 10px">
+          <div style="font-size:9.5px;color:#92400E;font-weight:600">Chi phí/năm</div>
+          <div style="font-size:17px;font-weight:900;color:#92400E">~7 tỷ VND</div>
+          <div style="font-size:9px;color:#64748B">Opera Foundation ~5.7 tỷ + dev cost ~1.3 tỷ (lương team)</div>
+        </div>
+      </div>
+
+      <!-- PA4: SiteMinder -->
+      <div style="background:#FFF7ED;border-radius:10px;padding:14px 16px;border:1px solid #FED7AA">
+        <div style="font-size:10px;font-weight:800;color:#C05621;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px">🔄 Phương án 3</div>
+        <div style="font-size:14px;font-weight:900;color:var(--navy);margin-bottom:3px">SiteMinder</div>
+        <div style="font-size:10.5px;color:var(--gray);margin-bottom:10px">Thay Hotellink bằng SiteMinder</div>
+        <div style="font-size:10.5px;color:var(--text-dark);line-height:1.8">
+          <div>✅ Cover cả OTA + Travel Agent</div>
+          <div>✅ Top 1 channel manager châu Á</div>
+          <div>✅ Tích hợp tốt với Opera</div>
+          <div>✅ MVL Web/App chỉ nhận allotment direct từ Opera</div>
+          <div>❌ ~1.5 tỷ/năm connection request đến Opera</div>
+          <div>❌ Toàn bộ OTA + Travel Agent setup lại từ SiteMinder</div>
+        </div>
+        <div style="margin-top:10px;background:#FEF3C7;border-radius:8px;padding:8px 10px">
+          <div style="font-size:9.5px;color:#92400E;font-weight:600">Chi phí/năm</div>
+          <div style="font-size:17px;font-weight:900;color:#92400E">~9+ tỷ VND</div>
+          <div style="font-size:9px;color:#64748B">Opera Foundation ~8.2 tỷ + SiteMinder ~1.2–2 tỷ</div>
+        </div>
+      </div>
+
     </div>
-    <table style="font-size:11.5px">
+
+    <!-- Comparison table -->
+    <table style="font-size:11px">
       <tr>
         <th>Tiêu chí so sánh</th>
         <th style="text-align:center">PA1 — Full Opera</th>
-        <th style="text-align:center;background:#0D7A8A">PA2 — Hybrid ✓</th>
+        <th style="text-align:center;background:#0D7A8A">PA2A — Hotellink Build</th>
+        <th style="text-align:center">PA2B — MVL Build</th>
         <th style="text-align:center">PA3 — SiteMinder</th>
       </tr>
-      <tr><td>Cover Travel Agent</td><td style="text-align:center"><span class="badge b-red">❌ Không</span></td><td style="text-align:center"><span class="badge b-green">✅ Có</span></td><td style="text-align:center"><span class="badge b-green">✅ Có (GDS)</span></td></tr>
-      <tr><td>Rủi ro migration</td><td style="text-align:center"><span class="badge b-red">Cao</span></td><td style="text-align:center"><span class="badge b-green">Thấp</span></td><td style="text-align:center"><span class="badge b-gold">Trung bình</span></td></tr>
-      <tr><td>Chi phí năm đầu</td><td style="text-align:center"><span class="badge b-red">~8.2 tỷ</span></td><td style="text-align:center"><span class="badge b-green">~7.2 tỷ</span></td><td style="text-align:center"><span class="badge b-gold">~9 tỷ+</span></td></tr>
-      <tr><td>Thời gian triển khai thêm</td><td style="text-align:center"><span class="badge b-gold">+4–6 tuần</span></td><td style="text-align:center"><span class="badge b-gold">Pending engineering est</span></td><td style="text-align:center"><span class="badge b-gold">+8–12 tuần</span></td></tr>
+      <tr><td>Cover Travel Agent</td>
+        <td style="text-align:center"><span class="badge b-red">❌ Không</span></td>
+        <td style="text-align:center"><span class="badge b-green">✅ Có</span></td>
+        <td style="text-align:center"><span class="badge b-green">✅ Có</span></td>
+        <td style="text-align:center"><span class="badge b-green">✅ Có</span></td>
+      </tr>
+      <tr><td>Rủi ro migration</td>
+        <td style="text-align:center"><span class="badge b-red">Cao</span></td>
+        <td style="text-align:center"><span class="badge b-green">Thấp</span></td>
+        <td style="text-align:center"><span class="badge b-red">Cao</span></td>
+        <td style="text-align:center"><span class="badge b-gold">Trung bình</span></td>
+      </tr>
+      <tr><td>Chi phí năm đầu</td>
+        <td style="text-align:center"><span class="badge b-red">~8.2 tỷ</span></td>
+        <td style="text-align:center"><span class="badge b-green">~7.2 tỷ</span></td>
+        <td style="text-align:center"><span class="badge b-gold">~7 tỷ (incl. dev)</span></td>
+        <td style="text-align:center"><span class="badge b-red">~9+ tỷ</span></td>
+      </tr>
+      <tr><td>Thời gian triển khai thêm</td>
+        <td style="text-align:center"><span class="badge b-gold">+4–6 tuần</span></td>
+        <td style="text-align:center"><span class="badge b-gold">Pending Partner est</span></td>
+        <td style="text-align:center"><span class="badge b-red">Pending engineering est</span></td>
+        <td style="text-align:center"><span class="badge b-gold">+8–12 tuần</span></td>
+      </tr>
     </table>
   </div>
   <span class="slide-n">08 / 17</span>
@@ -782,6 +828,7 @@
           <tr><td style="color:#1E293B">SiteMinder (nếu PA3, ước tính)</td><td style="text-align:right;color:#FCD34D">~1,200–2,000M/năm</td></tr>
         </table>
         <div style="margin-top:8px;font-size:10px;color:rgba(255,255,255,.65)">* Connection request Hotellink-Opera cần confirm với Partner về pricing thực tế</div>
+        <div style="margin-top:8px;font-size:10px;color:#FCA5A5;font-weight:600">⚠ Lưu ý: Đây là chi phí phần mềm, chưa bao gồm chi phí server infrastructure và chi phí lương team Tech hiện tại.</div>
       </div>
     </div>
   </div>
